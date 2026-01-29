@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Calculadora de BTU - FlostWerk</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #0f172a;
+  padding: 40px 10px;
+  color: #fff;
+}
+
+.box {
+  background: #ffffff;
+  color: #000;
+  max-width: 420px;
+  margin: auto;
+  padding: 22px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+label {
+  display: block;
+  margin-top: 12px;
+  font-size: 14px;
+}
+
+input {
+  width: 100%;
+  padding: 9px;
+  margin-top: 5px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+button {
+  margin-top: 15px;
+  width: 100%;
+  padding: 11px;
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 6px;
+  font-size: 15px;
+}
+
+button:hover {
+  background: #1d4ed8;
+}
+
+.resultado {
+  margin-top: 15px;
+  font-weight: bold;
+  text-align: center;
+  font-size: 16px;
+}
+
+.obs {
+  margin-top: 10px;
+  font-size: 13px;
+  text-align: center;
+  color: #444;
+}
+</style>
+</head>
+<body>
+
+<div class="box">
+  <h2>Calculadora de BTU</h2>
+
+  <label>Área do ambiente (m²)</label>
+  <input type="number" id="area" placeholder="Ex: 20">
+
+  <label>Número de pessoas</label>
+  <input type="number" id="pessoas" placeholder="Ex: 3">
+
+  <label>Quantidade de aparelhos eletrônicos</label>
+  <input type="number" id="eletronicos" placeholder="Ex: 2">
+
+  <button onclick="calcular()">Calcular</button>
+
+  <div class="resultado" id="resultado"></div>
+
+  <div class="obs">
+    Para cada janela ou porta no ambiente, adicione mais um eletrodoméstico no cálculo.
+  </div>
+</div>
+
+<script>
+function calcular() {
+  let area = Number(document.getElementById("area").value);
+  let pessoas = Number(document.getElementById("pessoas").value);
+  let eletronicos = Number(document.getElementById("eletronicos").value);
+
+  if (!area) {
+    alert("Preencha a área do ambiente.");
+    return;
+  }
+
+  let btu = (area * 600) + (pessoas * 600) + (eletronicos * 600);
+
+  document.getElementById("resultado").innerText =
+    "Potência recomendada: " + btu.toLocaleString("pt-BR") + " BTUs";
+}
+</script>
+
+</body>
+</html>
