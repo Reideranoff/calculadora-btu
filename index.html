@@ -14,65 +14,106 @@ body {
   align-items: center;
   height: 100vh;
   margin: 0;
+  position: relative;
+}
+
+/* filtro escuro no fundo */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: -1;
 }
 
 .box {
-  background: #ffffff;
+  background: rgba(255, 255, 255, 0.95);
   color: #000;
   max-width: 420px;
-  margin: auto;
-  padding: 22px;
-  border-radius: 12px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+  width: 100%;
+  padding: 24px 26px;
+  border-radius: 16px;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+  backdrop-filter: blur(6px);
+  transition: 0.3s;
+}
+
+.box:hover {
+  transform: translateY(-3px);
 }
 
 h2 {
   text-align: center;
-  margin-bottom: 10px;
+  margin-bottom: 14px;
+  font-size: 20px;
 }
 
 label {
   display: block;
   margin-top: 12px;
   font-size: 14px;
+  font-weight: 600;
 }
 
 input {
   width: 100%;
-  padding: 9px;
+  padding: 10px;
   margin-top: 5px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  font-size: 14px;
+  transition: 0.2s;
+}
+
+input:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 2px rgba(37,99,235,0.15);
 }
 
 button {
-  margin-top: 15px;
+  margin-top: 16px;
   width: 100%;
-  padding: 11px;
-  background: #2563eb;
+  padding: 12px;
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
   color: #fff;
   border: none;
   cursor: pointer;
-  border-radius: 6px;
+  border-radius: 10px;
   font-size: 15px;
+  font-weight: bold;
+  transition: 0.25s;
 }
 
 button:hover {
-  background: #1d4ed8;
+  transform: scale(1.02);
+  background: linear-gradient(135deg, #1d4ed8, #1e40af);
 }
 
 .resultado {
-  margin-top: 15px;
-  font-weight: bold;
+  margin-top: 16px;
   text-align: center;
   font-size: 16px;
+  padding: 10px;
+  border-radius: 10px;
+  background: #f1f5f9;
+  border: 1px solid #e5e7eb;
+}
+
+.resultado strong {
+  color: #1d4ed8;
+  font-size: 18px;
 }
 
 .obs {
-  margin-top: 10px;
-  font-size: 13px;
+  margin-top: 12px;
+  font-size: 12.5px;
   text-align: center;
-  color: #444;
+  color: #555;
+  line-height: 1.4;
 }
 </style>
 </head>
@@ -95,11 +136,12 @@ button:hover {
   <div class="resultado" id="resultado"></div>
 
   <div class="obs">
-    Para cada janela ou porta no ambiente, adicione mais um eletrodoméstico no cálculo.
+    💡 Dica técnica: para cada janela ou porta no ambiente, considere adicionar mais 1 equipamento no cálculo.
   </div>
 </div>
 
-<script>// TRAVA DE DOMÍNIO (simples)
+<script>
+// TRAVA DE DOMÍNIO (simples)
 const dominiosPermitidos = ["flostwerk.com", "www.flostwerk.com", "reideranoff.github.io"];
 
 if (!dominiosPermitidos.includes(window.location.hostname)) {
@@ -118,8 +160,8 @@ function calcular() {
 
   let btu = (area * 600) + (pessoas * 600) + (eletronicos * 600);
 
-  document.getElementById("resultado").innerText =
-    "Potência recomendada: " + btu.toLocaleString("pt-BR") + " BTUs";
+  document.getElementById("resultado").innerHTML =
+    "Capacidade térmica estimada:<br><strong>" + btu.toLocaleString("pt-BR") + " BTU/h</strong>";
 }
 </script>
 
