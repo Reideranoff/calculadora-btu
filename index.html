@@ -99,7 +99,13 @@ button:hover {
   </div>
 </div>
 
-<script>
+<script>// TRAVA DE DOMÍNIO (simples)
+const dominiosPermitidos = ["flostwerk.com", "www.flostwerk.com", "reideranoff.github.io"];
+
+if (!dominiosPermitidos.includes(window.location.hostname)) {
+  document.body.innerHTML = "<h2 style='color:white;text-align:center;margin-top:20%;'>Acesso não autorizado.</h2>";
+}
+
 function calcular() {
   let area = Number(document.getElementById("area").value);
   let pessoas = Number(document.getElementById("pessoas").value);
